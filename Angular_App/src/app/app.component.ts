@@ -1,26 +1,32 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [RouterOutlet, FormsModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrl: './app.component.scss'
 })
 
 export class AppComponent {
-
-  title = "Hello from BridgeLabz";
-  imgUrl = "logo.jpg";
-  url = "https://www.bridgelabz.com";
-  userName: string = "";
+  title = 'Angular';
+  imageUrl = "logo.jpg";
+  onClickHref = "https://www.google.com"
+  name = ""
+  nameError = ""
 
   ngOnInit(): void {
     this.title = "Hello from BridgeLabz";
   }
 
-  onClick(event: Event) {
-    console.log("Save button is clicked!", event);
-    window.open(this.url, "_blank");
+  logoOnClickHandler($event: Event){
+    window.open(this.onClickHref, "_blank")
+  }
+
+  onInputHandler($event: Event){
+    const nameRegex = new RegExp('^[A-Z]{1}[A-Za-z]{2,}$');
+    if (!nameRegex.test(this.name)) this.nameError = "Name is Incorrect!"
+    else this.nameError = ""
   }
 }
